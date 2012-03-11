@@ -1,1 +1,5 @@
-Test
+This repository contains the code developed for the SoM General Exam between 15 Feb and 15 Mar 2012.
+
+Most of the scripts compute/plot various diagnostics from WRF output.
+
+The WRF namelists for the WRF model runs are also included.
