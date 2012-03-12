@@ -41,6 +41,8 @@ mcsspeedy = 0.0
 p = pp + pb
 # HEIGHTS
 ph = phb + php
+zm = (ph[:,1:,:,:] + ph[:,:-1,:,:])/(2.0*9.8)
+print zm[0,:,0,0]
 dz = (ph[:,1:,:,:] - ph[:,:-1,:,:])/9.8
 # DENSITY
 mu = mub + mup
@@ -167,6 +169,7 @@ for i in times:
 	  pgmlt_box += pgmlt[i,:,:,cpt-hw:cpt+hw]
 	  psmlt_box += psmlt[i,:,:,cpt-hw:cpt+hw]
 	  u_box += u[i,:,:,cpt-hw:cpt+hw]
+	  w_box += w[i,:,:,cpt-hw:cpt+hw]
 	except:
 	  TENDx_box = np.copy(TENDx[:,i,:,:,cpt-hw:cpt+hw])
 	  TENDy_box = np.copy(TENDy[:,i,:,:,cpt-hw:cpt+hw])
@@ -175,6 +178,7 @@ for i in times:
 	  pgmlt_box = np.copy(pgmlt[i,:,:,cpt-hw:cpt+hw])
 	  psmlt_box = np.copy(psmlt[i,:,:,cpt-hw:cpt+hw])
 	  u_box = np.copy(u[i,:,:,cpt-hw:cpt+hw])
+	  w_box = np.copy(w[i,:,:,cpt-hw:cpt+hw])
 	#cpt += 3
 
 TENDx_box = TENDx_box/times.shape[0]
@@ -184,6 +188,7 @@ psdep_box = psdep_box/times.shape[0]
 pgmlt_box = pgmlt_box/times.shape[0]
 psmlt_box = psmlt_box/times.shape[0]
 u_box = u_box/times.shape[0]
+w_box = w_box/times.shape[0]
 #TENDx = np.average(TENDx, axis=1)
 #TENDy = np.average(TENDy, axis=1)
 
@@ -191,16 +196,21 @@ u_box = u_box/times.shape[0]
 print 'non-moving maximum'
 TENDx = np.where(TENDx>0, 0.0, -TENDx)
 TENDx_max = np.amax(TENDx[:,:,:,:,:], axis=1)
+
+vaup = np.average(TENDx[3,:,:12,100:120,:], axis=2)
+print vaup.max()
+pickle.dump(vaup, open('vaup%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
+        
 pickle.dump(TENDx_max, open('tendxmax%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
 #pickle.dump(TENDx[3,:,:], open('tendxall%d-%d_wsm6enhg.pk'%(st,et-1), 'wb'))
-#pickle.dump(VAup, open('VAup%d-%d_wsm6enhg.pk'%(st,et-1), 'wb'))
 
 print 'Pickling'
-pickle.dump(TENDx_box, open('tendx%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
-pickle.dump(TENDy_box, open('tendy%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
-pickle.dump(prevp_box, open('prevp%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
-pickle.dump(psdep_box, open('psdep%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
-pickle.dump(pgmlt_box, open('pgmlt%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
-pickle.dump(psmlt_box, open('psmlt%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
-pickle.dump(u_box, open('u%d-%d_wsm6enhg.pk'%(st+1,et-2), 'wb'))
+pickle.dump(TENDx_box, open('tendx%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
+pickle.dump(TENDy_box, open('tendy%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
+pickle.dump(prevp_box, open('prevp%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
+pickle.dump(psdep_box, open('psdep%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
+pickle.dump(pgmlt_box, open('pgmlt%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
+pickle.dump(psmlt_box, open('psmlt%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
+pickle.dump(u_box, open('u%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
+pickle.dump(w_box, open('w%d-%d_%d_wsm6enhg.pk'%(st+1,et-2,cpt), 'wb'))
 
