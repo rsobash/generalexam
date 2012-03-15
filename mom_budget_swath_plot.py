@@ -38,10 +38,12 @@ TENDxmax = np.average(TENDxmax[field,:,level-hw:level+hw,:], axis=1)
 TENDxmax = ndimage.gaussian_filter(TENDxmax, sigma=[0.25,1.00])
 
 pyplot.figure(figsize=(18,6))
+ax1 = pyplot.gca()
 #cs = pyplot.contourf(xvals, z, f, levels=np.arange(-80,80,10), alpha=0.7)
 cs = pyplot.contourf(np.arange(0,297), z, TENDxmax, alpha=0.7, levels=np.arange(50,300,30), cmap=pyplot.get_cmap('Blues_r'))
 
 pyplot.ylim((0,4))
+ax1.set_xticklabels(np.arange(100,700,100))
 pyplot.xlim((75,300))
 pyplot.colorbar(cs, pad=0, aspect=40)
 pyplot.savefig('tend.png')

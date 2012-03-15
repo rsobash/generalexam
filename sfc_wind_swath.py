@@ -35,14 +35,14 @@ pertlin = tlin - reflin[:,:,np.newaxis,np.newaxis]
 refwsm6 = twsm6[:,:,0,0]
 pertwsm6 = twsm6 - refwsm6[:,:,np.newaxis,np.newaxis]
 
-times = np.arange(2,10,2)
+times = np.arange(2,13,2)
 for t in times:
 	print maglin.shape
 	#c1 = contour(pertlin[t,0,:], levels=[-1], colors='blue', linestyles='solid', linewidths=0.5)
 	c2 = contour(pertlin[t,0,:], levels=[-1], colors='gray', linestyles='solid', linewidths=0.5)
 	
 	#contourf(maglin[t,0,:], levels=[25,100], colors='blue', alpha=0.5)
-	c3 = contourf(maglin[t,0,:], levels=[0,25,30,35,40,100], colors=['1.0','0.85', '0.7', '0.5', '0.3'])
+	c3 = contourf(maglin[t,0,:], levels=[25,30,35,40,100], colors=['0.85', '0.7', '0.5', '0.3'])
         
 	# PLOT S-R WIND SWATH
 	#contourf(magwsm6[t,15,:]-20.0, levels=[7.5,10,12.5,15,20], colors=['0.7', '0.5', '0.3','0.1'])
