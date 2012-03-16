@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+# CODE TO COMPUTE COLD POOL STRENGTH PARAMETER C
+# AND C/delu RATIO
+
+
 from netCDF4 import Dataset
 import numpy as np
 from matplotlib.pyplot import *

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# CODE TO COMPUTE MOMENTUM BUDGET FROM WRF OUTPUT
+# CODE TO PLOT MOMENTUM BUDGET OUTPUT
 # AUTHOR: RYAN SOBASH
 
 from matplotlib import pyplot
